@@ -5,3 +5,4 @@ android/local.properties
 android/.gradle/
 ios/Flutter/flutter_assets/kernel_blob.bin
 ios/Flutter/flutter_assets/*
+ios/Flutter/App.framework/App

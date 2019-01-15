@@ -4,6 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'cai/CaiPaint.dart';
 import 'package:cai_flutter_demo/cai/CaiMixedManageState.dart';
 import 'cai/CaiKeyboard.dart';
+import 'cai/CaiPage.dart';
+import 'cai/CaiNavigator.dart';
+import 'model/CaiDartTest.dart';
+import 'cai/CaiAnimation.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -53,6 +57,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  // var navButtonTitle = "nav";
+  var navButtonTitleCount = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -73,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    caiTest();
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -136,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-             FlatButton(
+            FlatButton(
               color: Colors.blue,
               child: Text("Keyboard"),
               onPressed: () {
@@ -145,9 +152,42 @@ class _MyHomePageState extends State<MyHomePage> {
                     appBar: AppBar(
                       title: Text("Keyboard"),
                     ),
-                    body:CaiKeyboard(),
+                    body: CaiKeyboard(),
                   );
                 }));
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FlatButton(
+                color: Colors.blue,
+                child: Text("Page"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("Page"),
+                      ),
+                      body: CaiPage(),
+                    );
+                  }));
+                },
+              ),
+            ),
+            buildFlatButton(context),
+            FlatButton(
+              color: Colors.blue,
+              child: Text("Animation"),
+              onPressed: () {
+                navButtonTitleCount++;
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text("Animation"),
+                    ),
+                    body: CaiAnimation(),
+                  );
+                })).then((Object data) {});
               },
             ),
             Text(
@@ -165,6 +205,34 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  FlatButton buildFlatButton(BuildContext context) {
+    return FlatButton(
+      color: Colors.blue,
+      child: Text("Nav  $this $navButtonTitleCount"),
+      onPressed: () {
+        //这里如果不是点击按钮返回的（有回传），而是右滑动返回的，就没有值喽
+        if(navButtonTitleCount == null){
+          navButtonTitleCount = 1;
+        }
+        navButtonTitleCount++;
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("Nav $navButtonTitleCount"),
+            ),
+            body: CaiNavigator(
+              buttonTitleCount: navButtonTitleCount,
+            ),
+          );
+        })).then((Object data) {
+          print("this is return $data");
+          navButtonTitleCount = data;
+          setState(() {});
+        });
+      },
     );
   }
 }
