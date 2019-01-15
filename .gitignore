@@ -6,3 +6,8 @@ android/.gradle/
 ios/Flutter/flutter_assets/kernel_blob.bin
 ios/Flutter/flutter_assets/*
 ios/Flutter/App.framework/App
+pubspec.lock
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+ios/Runner/GeneratedPluginRegistrant.h
+ios/Runner/GeneratedPluginRegistrant.m
+pubspec.lock
