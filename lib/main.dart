@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+// import 'dart:developer';
+import 'cai/CaiPaint.dart';
+import 'package:cai_flutter_demo/cai/CaiMixedManageState.dart';
+import 'cai/CaiKeyboard.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  // debugPaintSizeEnabled = true;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -91,6 +99,57 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              child: Text("data"),
+            ),
+            FlatButton(
+              color: Colors.blue,
+              child: Text("Paint"),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text("Paint"),
+                    ),
+                    body: ConstrainedBox(
+                      constraints: BoxConstraints.expand(),
+                      child: CaiPaint(),
+                    ),
+                  );
+                }));
+              },
+            ),
+            FlatButton(
+              color: Colors.blue,
+              child: Text("State1"),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text("state"),
+                    ),
+                    body: ConstrainedBox(
+                      constraints: BoxConstraints.expand(),
+                      child: CaiMixedManageStateView(),
+                    ),
+                  );
+                }));
+              },
+            ),
+             FlatButton(
+              color: Colors.blue,
+              child: Text("Keyboard"),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text("Keyboard"),
+                    ),
+                    body:CaiKeyboard(),
+                  );
+                }));
+              },
+            ),
             Text(
               'You have pushed the button this many times:',
             ),
