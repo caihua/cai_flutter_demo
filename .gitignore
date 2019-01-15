@@ -2,3 +2,4 @@
 build/
 .packages
 android/local.properties
+android/.gradle/
