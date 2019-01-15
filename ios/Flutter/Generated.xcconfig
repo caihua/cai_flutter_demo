@@ -1,7 +1,7 @@
 // This is a generated file; do not edit or check into version control.
 FLUTTER_ROOT=/Users/cai/Documents/flutter/flutter
-FLUTTER_APPLICATION_PATH=/Users/cai/Documents/GitHub/cai_flutter_demo/cai_flutter_demo
-FLUTTER_TARGET=/Users/cai/Documents/GitHub/cai_flutter_demo/cai_flutter_demo/lib/main.dart
+FLUTTER_APPLICATION_PATH=/Users/cai/Documents/GitHub/cai_flutter_demo
+FLUTTER_TARGET=/Users/cai/Documents/GitHub/cai_flutter_demo/lib/main.dart
 FLUTTER_BUILD_DIR=build
 SYMROOT=${SOURCE_ROOT}/../build/ios
 FLUTTER_FRAMEWORK_DIR=/Users/cai/Documents/flutter/flutter/bin/cache/artifacts/engine/ios
