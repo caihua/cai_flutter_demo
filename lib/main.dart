@@ -8,6 +8,7 @@ import 'cai/CaiPage.dart';
 import 'cai/CaiNavigator.dart';
 import 'model/CaiDartTest.dart';
 import 'cai/CaiAnimation.dart';
+import 'cai/CaiAnimationWidget.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -190,6 +191,40 @@ class _MyHomePageState extends State<MyHomePage> {
                 })).then((Object data) {});
               },
             ),
+            Hero(
+              tag: "Animation2",
+              child: FlatButton(
+                color: Colors.blue,
+                child: Text("Animation2"),
+                onPressed: () {
+                  navButtonTitleCount++;
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("Animation"),
+                      ),
+                      body: CaiAnimationRoute(),
+                    );
+                  })
+                      // PageRouteBuilder(
+                      //     transitionDuration: Duration(microseconds: 500),
+                      //     pageBuilder: (BuildContext context,
+                      //         Animation animation,
+                      //         Animation secondaryAnimation) {
+                      //       return FadeTransition(
+                      //         opacity: animation,
+                      //         child: Scaffold(
+                      //           appBar: AppBar(
+                      //             title: Text("Animation2"),
+                      //           ),
+                      //           body: CaiAnimationRoute(),
+                      //         ),
+                      //       );
+                      //     }
+                      ).then((Object data) {});
+                },
+              ),
+            ),
             Text(
               'You have pushed the button this many times:',
             ),
@@ -214,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text("Nav  $this $navButtonTitleCount"),
       onPressed: () {
         //这里如果不是点击按钮返回的（有回传），而是右滑动返回的，就没有值喽
-        if(navButtonTitleCount == null){
+        if (navButtonTitleCount == null) {
           navButtonTitleCount = 1;
         }
         navButtonTitleCount++;
