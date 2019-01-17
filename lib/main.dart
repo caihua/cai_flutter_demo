@@ -9,6 +9,10 @@ import 'cai/CaiNavigator.dart';
 import 'model/CaiDartTest.dart';
 import 'cai/CaiAnimation.dart';
 import 'cai/CaiAnimationWidget.dart';
+import 'cai/CaiCustomPaint.dart';
+import 'cai/CaiCustomScrollView.dart';
+import 'cai/CaiCustomPaintRect.dart';
+import 'cai/CaiStack.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -90,112 +94,165 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: Text("data"),
-            ),
-            FlatButton(
-              color: Colors.blue,
-              child: Text("Paint"),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Scaffold(
-                    appBar: AppBar(
-                      title: Text("Paint"),
-                    ),
-                    body: ConstrainedBox(
-                      constraints: BoxConstraints.expand(),
-                      child: CaiPaint(),
-                    ),
-                  );
-                }));
-              },
-            ),
-            FlatButton(
-              color: Colors.blue,
-              child: Text("State1"),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Scaffold(
-                    appBar: AppBar(
-                      title: Text("state"),
-                    ),
-                    body: ConstrainedBox(
-                      constraints: BoxConstraints.expand(),
-                      child: CaiMixedManageStateView(),
-                    ),
-                  );
-                }));
-              },
-            ),
-            FlatButton(
-              color: Colors.blue,
-              child: Text("Keyboard"),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Scaffold(
-                    appBar: AppBar(
-                      title: Text("Keyboard"),
-                    ),
-                    body: CaiKeyboard(),
-                  );
-                }));
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FlatButton(
+        child: SingleChildScrollView(
+          child: Column(
+            // Column is also layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Invoke "debug painting" (press "p" in the console, choose the
+            // "Toggle Debug Paint" action from the Flutter Inspector in Android
+            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+            // to see the wireframe for each widget.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: Text("data"),
+              ),
+              FlatButton(
                 color: Colors.blue,
-                child: Text("Page"),
+                child: Text("Paint"),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return Scaffold(
                       appBar: AppBar(
-                        title: Text("Page"),
+                        title: Text("Paint"),
                       ),
-                      body: CaiPage(),
+                      body: ConstrainedBox(
+                        constraints: BoxConstraints.expand(),
+                        child: CaiPaint(),
+                      ),
                     );
                   }));
                 },
               ),
-            ),
-            buildFlatButton(context),
-            FlatButton(
-              color: Colors.blue,
-              child: Text("Animation"),
-              onPressed: () {
-                navButtonTitleCount++;
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Scaffold(
-                    appBar: AppBar(
-                      title: Text("Animation"),
-                    ),
-                    body: CaiAnimation(),
-                  );
-                })).then((Object data) {});
-              },
-            ),
-            Hero(
-              tag: "Animation2",
-              child: FlatButton(
+              FlatButton(
                 color: Colors.blue,
-                child: Text("Animation2"),
+                child: Text("CustomScrollView"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("Paint"),
+                      ),
+                      body: ConstrainedBox(
+                        constraints: BoxConstraints.expand(),
+                        child: CustomScrollViewTestRoute(),
+                      ),
+                    );
+                  }));
+                },
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text("State1"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("state"),
+                      ),
+                      body: ConstrainedBox(
+                        constraints: BoxConstraints.expand(),
+                        child: CaiMixedManageStateView(),
+                      ),
+                    );
+                  }));
+                },
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text("进度条"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("state2"),
+                      ),
+                      body: ConstrainedBox(
+                        constraints: BoxConstraints.expand(),
+                        child: GradientCircularProgressRoute(),
+                      ),
+                    );
+                  }));
+                },
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text("Stack"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("state2"),
+                      ),
+                      body: ConstrainedBox(
+                        constraints: BoxConstraints.expand(),
+                        child: CaiStack(),
+                      ),
+                    );
+                  }));
+                },
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text("自定义绘制"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("state2"),
+                      ),
+                      body: ConstrainedBox(
+                        constraints: BoxConstraints.expand(),
+                        child: CaiCustomPaintRect(),
+                      ),
+                    );
+                  }));
+                },
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text("Keyboard"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text("Keyboard"),
+                      ),
+                      body: CaiKeyboard(),
+                    );
+                  }));
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                  color: Colors.blue,
+                  child: Text("Page"),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: Text("Page"),
+                        ),
+                        body: CaiPage(),
+                      );
+                    }));
+                  },
+                ),
+              ),
+              buildFlatButton(context),
+              FlatButton(
+                color: Colors.blue,
+                child: Text("Animation"),
                 onPressed: () {
                   navButtonTitleCount++;
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -203,36 +260,55 @@ class _MyHomePageState extends State<MyHomePage> {
                       appBar: AppBar(
                         title: Text("Animation"),
                       ),
-                      body: CaiAnimationRoute(),
+                      body: CaiAnimation(),
                     );
-                  })
-                      // PageRouteBuilder(
-                      //     transitionDuration: Duration(microseconds: 500),
-                      //     pageBuilder: (BuildContext context,
-                      //         Animation animation,
-                      //         Animation secondaryAnimation) {
-                      //       return FadeTransition(
-                      //         opacity: animation,
-                      //         child: Scaffold(
-                      //           appBar: AppBar(
-                      //             title: Text("Animation2"),
-                      //           ),
-                      //           body: CaiAnimationRoute(),
-                      //         ),
-                      //       );
-                      //     }
-                      ).then((Object data) {});
+                  })).then((Object data) {});
                 },
               ),
-            ),
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+              Hero(
+                tag: "Animation2",
+                child: FlatButton(
+                  color: Colors.blue,
+                  child: Text("Animation2"),
+                  onPressed: () {
+                    navButtonTitleCount++;
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: Text("Animation"),
+                        ),
+                        body: CaiAnimationRoute(),
+                      );
+                    })
+                        // PageRouteBuilder(
+                        //     transitionDuration: Duration(microseconds: 500),
+                        //     pageBuilder: (BuildContext context,
+                        //         Animation animation,
+                        //         Animation secondaryAnimation) {
+                        //       return FadeTransition(
+                        //         opacity: animation,
+                        //         child: Scaffold(
+                        //           appBar: AppBar(
+                        //             title: Text("Animation2"),
+                        //           ),
+                        //           body: CaiAnimationRoute(),
+                        //         ),
+                        //       );
+                        //     }
+                        ).then((Object data) {});
+                  },
+                ),
+              ),
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.display1,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

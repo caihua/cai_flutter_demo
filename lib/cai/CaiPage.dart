@@ -55,7 +55,7 @@ class _CaiPageState extends State<CaiPage> {
         children: [
           new Expanded(
             child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 new Container(
                   padding: const EdgeInsets.only(bottom: 8.0),

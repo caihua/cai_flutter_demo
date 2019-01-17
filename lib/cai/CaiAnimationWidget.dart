@@ -29,9 +29,9 @@ class CaiAnimationRoute extends StatefulWidget {
 
 class _CaiAnimationRouteState extends State<CaiAnimationRoute>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation1;
-  Animation animation2;
-  Animation animation3;
+  Animation<double> animationTransfrom;
+  Animation animationBorder;
+  Animation animationColor;
   AnimationController controller;
   @override
   void initState() {
@@ -45,43 +45,45 @@ class _CaiAnimationRouteState extends State<CaiAnimationRoute>
       }
     };
     controller =
-        AnimationController(duration: Duration(seconds: 1), vsync: this);
+        AnimationController(duration: Duration(seconds: 3), vsync: this);
 
-    animation1 = Tween(begin: 0.0, end: pi * 2.0).animate(CurvedAnimation(
-        parent: controller, curve: Interval(0.0, 1.0, curve: Curves.linear)));
-    animation1.addStatusListener(listener);
+    animationTransfrom = Tween(begin: 0.0, end: pi * 2.0).animate(
+        CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.0, 1.0, curve: Curves.linear)));
+    animationTransfrom.addStatusListener(listener);
 
-    animation2 = BorderRadiusTween(
+    animationBorder = BorderRadiusTween(
       begin: BorderRadius.circular(0.0),
       end: BorderRadius.circular(50.0),
     ).animate(
       CurvedAnimation(
         parent: controller,
         curve: Interval(
-          0.0,
+          0.5,
           1.0,
           curve: Curves.ease,
         ),
       ),
     );
 
-    animation2.addStatusListener(listener);
+    animationBorder.addStatusListener(listener);
 
-    animation3 = ColorTween(
+    animationColor = ColorTween(
       begin: Colors.blue[300],
       end: Colors.blue[900],
     ).animate(
       CurvedAnimation(
         parent: controller,
         curve: Interval(
+          0.0,
           0.5,
-          0.75,
           curve: Curves.linear,
         ),
       ),
     );
 
-    animation3.addStatusListener(listener);
+    animationColor.addStatusListener(listener);
 
     controller.forward();
   }
@@ -99,10 +101,10 @@ class _CaiAnimationRouteState extends State<CaiAnimationRoute>
                 child: Text("Animation2"),
                 onPressed: () {})),
         CaiAnimationWidget(
-          animation: animation1,
+          animation: animationTransfrom,
         ),
         AnimatedBuilder(
-          animation: animation2,
+          animation: animationBorder,
           child: Container(
             // decoration: BoxDecoration(
             //      //BorderRadius.all(Radius.circular(10)),
@@ -114,11 +116,11 @@ class _CaiAnimationRouteState extends State<CaiAnimationRoute>
           ),
           builder: (BuildContext ctx, Widget child) {
             return ClipRRect(
-              borderRadius: animation2.value,
+              borderRadius: animationBorder.value,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius:
-                      animation2.value, //BorderRadius.all(Radius.circular(10)),
+                  borderRadius: animationBorder
+                      .value, //BorderRadius.all(Radius.circular(10)),
                   border: Border.all(width: 5, color: Colors.red),
                   color: Colors.yellow,
                 ),
@@ -131,8 +133,16 @@ class _CaiAnimationRouteState extends State<CaiAnimationRoute>
           child: Container(
               // color: Colors.blue,
               ),
-          animation: animation3,
+          animationBorder: animationBorder,
+          animationColor: animationColor,
+          controller: controller,
         ),
+        // CaiGrow(
+        //   child: Container(
+        //       // color: Colors.blue,
+        //       ),
+        //   animation: controller,
+        // ),
       ],
     );
   }
@@ -145,20 +155,28 @@ class _CaiAnimationRouteState extends State<CaiAnimationRoute>
 }
 
 class CaiGrow extends StatelessWidget {
-  CaiGrow({this.child, this.animation});
+  CaiGrow(
+      {this.child, this.animationBorder, this.animationColor, this.controller});
   final Widget child;
-  final Animation animation;
+  final Animation animationBorder;
+  final Animation animationColor;
+  final Animation controller;
   @override
   Widget build(BuildContext context) {
     return Container(
       child: AnimatedBuilder(
-        animation: animation,
+        animation: controller,
         builder: (BuildContext context, Widget child) {
           return Container(
             width: 100,
             height: 100,
             child: child,
-            color: animation.value,
+            decoration: BoxDecoration(
+              borderRadius: animationBorder
+                  .value, //BorderRadius.all(Radius.circular(10)),
+              border: Border.all(width: 5, color: Colors.red),
+              color: animationColor.value,
+            ),
           );
         },
         child: child,
