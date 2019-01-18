@@ -13,6 +13,8 @@ import 'cai/CaiCustomPaint.dart';
 import 'cai/CaiCustomScrollView.dart';
 import 'cai/CaiCustomPaintRect.dart';
 import 'cai/CaiStack.dart';
+import 'cai/CaiBatteryView.dart';
+import 'cai/CaiRouter.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -23,6 +25,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var pageA = Scaffold(
+      appBar: AppBar(
+        title: Text("Page A"),
+      ),
+      body: ConstrainedBox(
+        constraints: BoxConstraints.expand(),
+        child: CaiRouter(),
+      ),
+    );
+    var pageHome = MyHomePage(title: 'Flutter Demo Home Page');
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -37,7 +49,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: pageHome,
+      routes: <String, WidgetBuilder>{
+        // 这里可以定义静态路由，不能传递参数
+        '/router/page_home': (_) => pageHome,
+        '/router/page_a': (_) => pageA,
+      },
     );
   }
 }
@@ -201,6 +218,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               FlatButton(
+                  color: Colors.blue,
+                  child: Text("界面路由跳转"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/router/page_a");
+                  }),
+              FlatButton(
                 color: Colors.blue,
                 child: Text("自定义绘制"),
                 onPressed: () {
@@ -241,9 +264,27 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(builder: (context) {
                       return Scaffold(
                         appBar: AppBar(
-                          title: Text("Page"),
+                          title: Text("布局示例"),
                         ),
                         body: CaiPage(),
+                      );
+                    }));
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                  color: Colors.blue,
+                  child: Text("获取电量"),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: Text("获取电量"),
+                        ),
+                        body: CaiBatteryView(),
                       );
                     }));
                   },

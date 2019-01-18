@@ -13,3 +13,4 @@ ios/Runner/GeneratedPluginRegistrant.m
 pubspec.lock
 ios/Runner.xcworkspace/xcuserdata/cai.xcuserdatad/UserInterfaceState.xcuserstate
 *.xcuserstate
+ios/.DS_Store
