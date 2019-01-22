@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'CaiUser.dart';
+import 'package:rxdart/rxdart.dart';
 
 caiTest() {
   // test1();
+  test2();
 }
 
 test1() {
@@ -69,4 +71,103 @@ class TestAddF2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container();
   }
+}
+
+class TestClassA {
+  // var firstA;
+  // // var secondA;
+
+  // firstFunA() {
+  //   print("firstFunA");
+  //   return "firstFunA";
+  // }
+
+  // secondFunA() {
+  //   return "secondFunA";
+  // }
+}
+
+class TestClassD {
+  var firstD;
+  // var secondA;
+
+  firstFunD() {
+    print("firstFunD");
+    return "firstFunD";
+  }
+
+  // secondFunA() {
+  //   return "secondFunA";
+  // }
+}
+
+class TestClassC = TestClassB with TestClassD;
+
+abstract class TestClassB implements TestClassA {
+  var firstB;
+  var secondB;
+
+  // var firstA;
+  TestClassB();
+
+  firstFunB() {
+    print("firstFunB");
+    return "firstFunB";
+  }
+
+  secondFunB() {
+    return "secondFunB";
+  }
+
+  @override
+  firstFunA() {
+    // super.f;
+    return "b.firstFunA()";
+  }
+}
+
+test2() {
+  print("test2" + "-" * 100);
+  var cc = TestClassC();
+  cc.firstFunA();
+  cc.firstFunB();
+
+  var list1 = [1, 2, 3, 4, 5, 6]; //List();
+  // list1.add(1);
+  // list1.add(2);
+
+  var list2 = List(10); //list1;
+  // list2.add(3);
+
+  List.copyRange(list2, 0, list1, 1, 2);
+
+  list1.getRange(1, 3);
+  print("------$list1 $list2");
+
+  var bs = BehaviorSubject();
+  var bs2 = BehaviorSubject();
+  bs.add(1);
+  bs2.add(3);
+  bs2.add(4);
+  bs2.add(6);
+//  var os1= new Observable.just(1) // .just() creates an Observable that directly emits the past value
+//     .zipWith(new Observable.just(2), (one, two) => one - two)
+//     .listen((n){
+//       bs.sink.add(n);
+//     }); // prints 3
+  var os2 = bs.zipWith(bs2.stream, (one, two) {
+    return one + two;
+  });
+  os2.listen((n) {
+    print("*" * 50 + "$n");
+  });
+  bs2.listen((n) {
+    print("x" * 50 + "$n");
+  });
+  bs.close();
+  bs2.close();
+  //  bs.zipWith(other, zipper)
+
+  // var b = TestClassB()..firstFunA();
+  // print(b.firstFunA());
 }

@@ -7,7 +7,16 @@
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [GeneratedPluginRegistrant registerWithRegistry:self];
-    // Override point for customization after application launch.
+    
+//    NSOperation *a = [[NSOperation alloc]init];
+//    NSLog(@"%p",&a);
+//    
+//    NSOperationQueue *q = [NSOperationQueue currentQueue];
+//    [q addOperation:a];
+    
+    FlutterBasicMessageChannel *x;//这个东西怎么用
+    
+    
     FlutterViewController *vc = (FlutterViewController*)self.window.rootViewController;
     FlutterMethodChannel *batteryMethodChannel = [FlutterMethodChannel methodChannelWithName:@"samples.flutter.io/battery" binaryMessenger:vc];
     
