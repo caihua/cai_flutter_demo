@@ -48,7 +48,7 @@ class _CaiPageState extends State<CaiPage> {
       fit: BoxFit.cover,
       // color: Colors.yellow,
     );
-    
+
     Widget titleSection = new Container(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
       child: new Row(
@@ -102,14 +102,85 @@ Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situate
         Container(
           child: topImage,
         ),
+        ListTile(
+            leading: const Icon(Icons.flight_land),
+            title: const Text('Trix\'s airplane'),
+            subtitle: Text('The airplane is only in Act II.'),
+            trailing: Text("data"),
+            enabled: true,
+            selected: true,
+            onTap: () {/* react to the tile being tapped */}),
         Container(
           child: line,
           padding: EdgeInsets.all(10),
         ),
-         
         titleSection,
         buttonSection,
-        textSection
+        textSection,
+        Row(
+          children: <Widget>[
+            Text("1"),
+            // Expanded(
+            //   child: Column(
+            //     children: <Widget>[
+            //       Text("data1"),
+            //       Text("data2"),
+            //       Row(
+            //         children: <Widget>[
+            //           Text("data3"),
+            //           Text("data4"),
+            //           Expanded(
+            //             child: Container(),
+            //           ),
+            //           Text("data5"),
+            //         ],
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // Expanded(child: Container(),),
+            // Expanded(
+            //   child: Row(
+            //     children: <Widget>[
+            //       Expanded(
+            //         child: Container(),
+            //       ),
+            //       Text("x"),
+            //     ],
+            //   ),
+            // ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text("2"),
+            ),
+          ],
+        ),
+        Wrap(
+          spacing: 8.0, // gap between adjacent chips
+          runSpacing: 4.0, // gap between lines
+          children: <Widget>[
+            Chip(
+              avatar: CircleAvatar(
+                  backgroundColor: Colors.blue.shade900, child: Text('AH')),
+              label: Text('Hamilton'),
+            ),
+            Chip(
+              avatar: CircleAvatar(
+                  backgroundColor: Colors.blue.shade900, child: Text('ML')),
+              label: Text('Lafayette'),
+            ),
+            Chip(
+              avatar: CircleAvatar(
+                  backgroundColor: Colors.blue.shade900, child: Text('HM')),
+              label: Text('Mulligan'),
+            ),
+            Chip(
+              avatar: CircleAvatar(
+                  backgroundColor: Colors.blue.shade900, child: Text('JL')),
+              label: Text('Laurens'),
+            ),
+          ],
+        ),
       ],
     );
 
